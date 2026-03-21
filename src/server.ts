@@ -3,14 +3,15 @@ import express from "express";
 import UserRouter from "./routes/user";
 import { errorHandler } from "middlewares/errorHandler";
 import { notPageHandler } from "middlewares/notPageHandler";
+import cookieParser from "cookie-parser";
 
 export const createServer = () => {
-  const PORT = process.env.PORT;
+  const PORT = process.env.PORT || 5000;
   const app = express();
   app.use(cors());
-
+  app.use(express.json());
+  app.use(cookieParser());
   app.use("/user", UserRouter);
-
   app.use(notPageHandler);
   app.use(errorHandler);
 
