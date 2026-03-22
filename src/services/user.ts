@@ -1,8 +1,10 @@
 import createHttpError from "http-errors";
 import bcrypt from "bcrypt";
 import usersCollection from "../db/models/User";
+
 import { LoginInput, RegisterInput } from "validator/userValidator";
 import jwt from "jsonwebtoken";
+import sessionsCollection from "db/models/Sessions";
 
 const registerUser = async (UserData: RegisterInput) => {
   const { email, password } = UserData;
@@ -24,7 +26,7 @@ const registerUser = async (UserData: RegisterInput) => {
 
 const loginUser = async (userData: LoginInput) => {
   const { email, password } = userData;
-  const user = await usersCollection.findOne({ email });
+  const user = await usersCollection.findOne({ email }).select("+password");
   if (!user) {
     throw createHttpError(404, "user not found.");
   }
@@ -34,7 +36,7 @@ const loginUser = async (userData: LoginInput) => {
   }
   const accessToken = jwt.sign(
     {
-      id: user._id,
+      id: user._id.toString(),
       email: user.email,
     },
     process.env.JWT_SECRET as string,
@@ -43,37 +45,75 @@ const loginUser = async (userData: LoginInput) => {
 
   const refreshToken = jwt.sign(
     {
-      id: user._id,
+      id: user._id.toString(),
     },
     process.env.JWT_SECRET as string,
     { expiresIn: "24h" },
   );
+
+  await sessionsCollection.create({
+    userId: user._id,
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil: new Date(Date.now() + 15 * 60 * 1000),
+    refreshTokenValidUntil: new Date(Date.now() + 24 * 60 * 60 * 1000),
+  });
   return { accessToken, refreshToken };
 };
 const refreshUser = async (refreshToken: string) => {
   if (!refreshToken) {
     throw createHttpError(401, "No refresh token");
   }
-  try {
-    const decoded = jwt.verify(
-      refreshToken,
-      process.env.JWT_SECRET as string,
-    ) as { id: string };
-
-    const user = await usersCollection.findById(decoded.id);
-    if (!user) {
-      throw createHttpError(403, "User not found or logged out");
-    }
-
-    const newAccessToken = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "15m" },
-    );
-    return { accessToken: newAccessToken };
-  } catch (error) {
-    throw createHttpError(403, "Invalid or expired refresh token");
+  const decoded = jwt.decode(refreshToken) as { id: string } | null;
+  if (!decoded) {
+    throw createHttpError(403, "invalid refresh token");
   }
+  const session = await sessionsCollection.findOne({ refreshToken });
+  if (!session) {
+    throw createHttpError(403, "session bot found");
+  }
+  if (session.refreshTokenValidUntil < new Date()) {
+    throw createHttpError(403, "refresh token expired");
+  }
+  const verified = jwt.verify(refreshToken, process.env.JWT_SECRET as string);
+  if (!verified) {
+    throw createHttpError(403, "invalid refresh token signature");
+  }
+
+  const newAccessToken = jwt.sign(
+    { id: session.userId.toString() },
+    process.env.JWT_SECRET as string,
+    { expiresIn: "15m" },
+  );
+
+  session.accessToken = newAccessToken;
+  session.accessTokenValidUntil = new Date(Date.now() + 15 * 60 * 1000);
+  await session.save();
+  return { accessToken: newAccessToken };
 };
 
-export { registerUser, loginUser, refreshUser };
+const logoutUser = async (
+  refreshToken: string | null,
+  accessToken: string | null,
+) => {
+  const query: any = {};
+  if (refreshToken) query.refreshToken = refreshToken;
+  if (accessToken) query.accessToken = accessToken;
+
+  if (Object.keys(query).length === 0) {
+    return { message: "allready logged out" };
+  }
+
+  await sessionsCollection.deleteOne(query);
+  return { message: "logout successful" };
+};
+
+const userInfo = async (userId: string) => {
+  const user = await usersCollection.findById(userId).select("name email");
+  if (!user) {
+    throw createHttpError(404, "user not found");
+  }
+  return user;
+};
+
+export { registerUser, loginUser, refreshUser, logoutUser, userInfo };

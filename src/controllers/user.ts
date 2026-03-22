@@ -4,7 +4,13 @@ import {
   RegisterInput,
   registerSchema,
 } from "validator/userValidator";
-import { loginUser, refreshUser, registerUser } from "../services/user";
+import {
+  loginUser,
+  logoutUser,
+  refreshUser,
+  registerUser,
+  userInfo,
+} from "../services/user";
 import { Request, Response } from "express";
 
 const registerController = async (req: Request, res: Response) => {
@@ -37,26 +43,39 @@ const loginController = async (req: Request, res: Response) => {
 const refreshController = async (req: Request, res: Response) => {
   const userCookie = req.cookies.refreshToken;
   const { accessToken } = await refreshUser(userCookie);
-  res.status(200).send({ accessToken });
+  res.status(200).send({
+    message: "token refreshed",
+    status: 200,
+    accessToken,
+  });
 };
 
 const logoutContoller = async (req: Request, res: Response) => {
   const refreshToken = req.cookies?.refreshToken;
-  if (!refreshToken) {
-    res.status(200).send({
-      message: "already logged out",
-      status: 200,
-    });
-  }
+  const authHeader = req.headers.authorization;
+  const accessToken = authHeader ? authHeader.split(" ")[1] : null;
+
+  const result = await logoutUser(refreshToken, accessToken);
+
   res.clearCookie("refreshToken", {
     httpOnly: true,
     sameSite: "strict",
     // secure: true,
   });
 
+  res.status(200).send(result);
+};
+
+const userInfoController = async (req: Request, res: Response) => {
+  const userId = (req as any).user?.id;
+  if (!userId) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const user = await userInfo(userId);
+
   res.status(200).send({
-    message: "logout successful",
-    status: 200,
+    name: user.name,
+    email: user.email,
   });
 };
 
@@ -65,4 +84,5 @@ export {
   loginController,
   refreshController,
   logoutContoller,
+  userInfoController,
 };
