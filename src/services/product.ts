@@ -1,6 +1,6 @@
 import { DEFAULT_PAGINATION_VALUES } from "constants/pagination";
 import { ProductModel } from "db/models/Product";
-import { ProductServiceParams } from "types/product";
+import { ProductServiceParams, UpdateProductRequest } from "types/product";
 
 const getProdutServices = ({
   page = DEFAULT_PAGINATION_VALUES.page,
@@ -36,4 +36,18 @@ const getProdutServices = ({
     .limit(limit);
 };
 
-export { getProdutServices };
+const updateProductServices = async (
+  prdouctId: string,
+  data: UpdateProductRequest,
+) => {
+  return await ProductModel.findByIdAndUpdate(prdouctId, data, {
+    new: true,
+    includeResultMetadata: true,
+  });
+};
+
+const deleteProductServices = async (productId: string) => {
+  return await ProductModel.findByIdAndDelete(productId);
+};
+
+export { getProdutServices, updateProductServices, deleteProductServices };
