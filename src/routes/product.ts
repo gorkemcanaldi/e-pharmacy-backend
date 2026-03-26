@@ -1,6 +1,7 @@
 import {
   deleteProductController,
   getProductController,
+  newProductController,
   updateProductController,
 } from "controllers/productController";
 import { Router } from "express";
@@ -10,6 +11,7 @@ import { ctrlWrapper } from "utils/ctrlWrapper";
 const ProductRouter = Router();
 
 ProductRouter.get("/", userMiddlewares, ctrlWrapper(getProductController));
+ProductRouter.post("/", userMiddlewares, ctrlWrapper(newProductController));
 ProductRouter.put(
   "/:productId",
   userMiddlewares,
@@ -20,4 +22,5 @@ ProductRouter.delete(
   userMiddlewares,
   ctrlWrapper(deleteProductController),
 );
+
 export default ProductRouter;

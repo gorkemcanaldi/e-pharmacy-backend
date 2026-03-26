@@ -5,7 +5,7 @@ export interface Product {
   suppliers: string;
   stock: number;
   price: number;
-  category: string;
+  category: ProductCategory;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -19,9 +19,18 @@ export interface ProductServiceParams {
     name?: string;
     suppliers?: string;
     stock?: number | null;
-    category?: string;
+    category?: ProductCategory;
     price?: number | null;
   };
+}
+export enum ProductCategory {
+  Medicine = "Medicine",
+  Heart = "Heart",
+  Head = "Head",
+  Hand = "Hand",
+  Leg = "Leg",
+  DentalCare = "Dental Care",
+  SkinCare = "Skin Care",
 }
 
 export interface CreateProductRequest {
@@ -30,14 +39,14 @@ export interface CreateProductRequest {
   suppliers: string;
   stock: number;
   price: number;
-  category: string;
+  category: ProductCategory;
 }
 
 export interface UpdateProductRequest {
   photo?: string;
-  name?: string;
-  suppliers?: string;
-  stock?: number;
-  price?: number;
-  category?: string;
+  name: string;
+  suppliers: string;
+  stock: number;
+  price: number;
+  category: ProductCategory;
 }

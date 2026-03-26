@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
+import { error } from "node:console";
 import {
   deleteProductServices,
   getProdutServices,
+  newProductServices,
   updateProductServices,
 } from "services/product";
 import { parseFilterParams } from "utils/parseFilterParams";
 import { parsedPaginationParams } from "utils/parsePaginationParams";
 import { parseSortParams } from "utils/parseSortParams";
+import { productSchema } from "validator/productValidation";
 
 const getProductController = async (req: Request, res: Response) => {
   const queryParams = req.query;
@@ -28,9 +31,18 @@ const getProductController = async (req: Request, res: Response) => {
 
 const updateProductController = async (req: Request, res: Response) => {
   const { productId } = req.params;
-  const data = req.body;
+  const parseResult = productSchema.safeParse(req.body);
 
-  const update = await updateProductServices(productId as string, data);
+  if (!parseResult.success) {
+    return res.status(400).json({
+      message: "validation failed",
+      errors: parseResult.error.format(),
+    });
+  }
+  const update = await updateProductServices(
+    productId as string,
+    parseResult.data,
+  );
   if (!update) {
     return res.status(404).json({ message: "Product not found" });
   }
@@ -47,8 +59,23 @@ const deleteProductController = async (req: Request, res: Response) => {
   res.json({ message: "Product remove successfully", product: remove });
 };
 
+const newProductController = async (req: Request, res: Response) => {
+  const parseResult = productSchema.safeParse(req.body);
+  if (!parseResult.success) {
+    return res.status(400).json({
+      message: "validation failed",
+      errors: parseResult.error.format(),
+    });
+  }
+
+  const product = await newProductServices(parseResult.data);
+
+  res.status(201).send({ message: "New product added.", product });
+};
+
 export {
   getProductController,
   updateProductController,
   deleteProductController,
+  newProductController,
 };

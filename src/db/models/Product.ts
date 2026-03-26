@@ -8,7 +8,19 @@ const productSchema = new Schema<Product>(
     suppliers: { type: String, required: true },
     stock: { type: Number, required: true },
     price: { type: Number, required: true },
-    category: { type: String, required: true },
+    category: {
+      type: String,
+      enum: [
+        "Medicine",
+        "Heart",
+        "Head",
+        "Hand",
+        "Leg",
+        "Dental Care",
+        "Skin Care",
+      ],
+      required: true,
+    },
   },
   { timestamps: true, versionKey: false },
 );
