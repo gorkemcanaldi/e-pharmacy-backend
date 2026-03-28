@@ -23,6 +23,7 @@ export interface ProductServiceParams {
     price?: number | null;
   };
 }
+
 export enum ProductCategory {
   Medicine = "Medicine",
   Heart = "Heart",

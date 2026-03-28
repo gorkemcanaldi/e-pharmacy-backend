@@ -5,6 +5,7 @@ const parseNumber = (value) => {
   }
   return par;
 };
+// product
 
 const parseCategory = (ctgry) => {
   const category = [
@@ -36,5 +37,29 @@ export const parseFilterParams = (query) => {
     stock: stockValue,
     category: categoryValue,
     price: priceValue,
+  };
+};
+
+// suppliers
+
+const parseStatus = (st) => {
+  const status = ["Active", "Deactive"];
+  if (status.includes(st)) {
+    return st;
+  }
+  return null;
+};
+
+export const parseFilterParamsSup = (query) => {
+  const { name, address, suppliers, date, amount, status } = query;
+  const statusValue = parseStatus(status);
+  const amountValue = parseNumber(amount);
+  return {
+    name,
+    address,
+    suppliers,
+    date,
+    amount: amountValue,
+    status: statusValue,
   };
 };

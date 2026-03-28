@@ -9,6 +9,15 @@ const SORT_FİELDS = [
   "category",
   "updatedAt",
 ];
+const SORT_FİELDS_SUPPLİERS = [
+  "_id",
+  "name",
+  "address",
+  "suppliers",
+  "date",
+  "amount",
+  "status",
+];
 
 const DEFAULT_PAGINATION_VALUES = {
   page: 1,
@@ -17,4 +26,9 @@ const DEFAULT_PAGINATION_VALUES = {
   sortOrder: "asc",
 };
 
-export { DEFAULT_PAGINATION_VALUES, SORT_ORDER, SORT_FİELDS };
+export {
+  DEFAULT_PAGINATION_VALUES,
+  SORT_ORDER,
+  SORT_FİELDS,
+  SORT_FİELDS_SUPPLİERS,
+};

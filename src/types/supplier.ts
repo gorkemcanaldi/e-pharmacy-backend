@@ -1,29 +1,48 @@
 export interface Supplier {
-  id: string;
-  name: string; // kişi adı
-  address: string; // adres
-  company: string; // "Square" (JSON’da suppliers alanı aslında company)
-  date: Date; // teslim tarihi
-  amount: number; // tutar
-  status: string; // Active / Inactive
+  name: string;
+  address: string;
+  suppliers: string;
+  date: Date;
+  amount: number;
+  status: SuppliersStatus;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface SupplierServicesParams {
+  page?: number;
+  perPage?: number;
+  sortBy?: string;
+  sortOrder?: string;
+  filter?: {
+    name?: string;
+    address?: string;
+    suppliers?: string;
+    date?: Date;
+    amount?: number | null;
+    status?: SuppliersStatus;
+  };
+}
+
+export enum SuppliersStatus {
+  Active = "Active",
+  Deactive = "Deactive",
 }
 
 export interface CreateSupplierRequest {
   name: string;
   address: string;
-  company: string;
+  suppliers: string;
   date: Date;
   amount: number;
-  status: string;
+  status: SuppliersStatus;
 }
 
 export interface UpdateSupplierRequest {
   name?: string;
   address?: string;
-  company?: string;
+  suppliers?: string;
   date?: Date;
   amount?: number;
-  status?: string;
+  status?: SuppliersStatus;
 }
