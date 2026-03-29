@@ -19,6 +19,16 @@ const SORT_FİELDS_SUPPLİERS = [
   "status",
 ];
 
+const SORT_FİELDS_ORDERS = [
+  "_id",
+  "name",
+  "address",
+  "products",
+  "price",
+  "status",
+  "order_date",
+];
+
 const DEFAULT_PAGINATION_VALUES = {
   page: 1,
   perPage: 5,
@@ -31,4 +41,5 @@ export {
   SORT_ORDER,
   SORT_FİELDS,
   SORT_FİELDS_SUPPLİERS,
+  SORT_FİELDS_ORDERS,
 };

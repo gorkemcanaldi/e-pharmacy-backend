@@ -63,3 +63,36 @@ export const parseFilterParamsSup = (query) => {
     status: statusValue,
   };
 };
+
+// orders
+
+const parseStatusOr = (st) => {
+  const status = [
+    "Completed",
+    "Confirmed",
+    "Pending",
+    "Cancelled",
+    "Processing",
+    "Shipped",
+    "Delivered",
+  ];
+  if (status.includes(st)) {
+    return st;
+  }
+  return null;
+};
+
+export const parseFilterParamsOr = (query) => {
+  const { name, address, products, price, status, order_date } = query;
+  const statusValue = parseStatusOr(status);
+  const priceValue = parseNumber(price);
+  const productsValue = parseNumber(products);
+  return {
+    name,
+    address,
+    order_date,
+    status: statusValue,
+    price: priceValue,
+    products: productsValue,
+  };
+};

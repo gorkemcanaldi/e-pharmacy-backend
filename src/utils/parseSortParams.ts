@@ -3,6 +3,7 @@ import {
   SORT_FİELDS,
   SORT_FİELDS_SUPPLİERS,
   SORT_ORDER,
+  SORT_FİELDS_ORDERS,
 } from "constants/pagination";
 
 const parseSortBy = (sortBy) => {
@@ -11,12 +12,14 @@ const parseSortBy = (sortBy) => {
   }
   return DEFAULT_PAGINATION_VALUES.sortBy;
 };
-// suppliers
-const parseSortBySup = (sortBy) => {
-  if (SORT_FİELDS_SUPPLİERS.includes(sortBy)) {
-    return sortBy;
-  }
-  return DEFAULT_PAGINATION_VALUES.sortBy;
+
+export const parseSortParams = (query) => {
+  const sortBy = parseSortBy(query.sortBy);
+  const sortOrder = parseSortOrder(query.sortOrder);
+  return {
+    sortBy,
+    sortOrder,
+  };
 };
 
 const parseSortOrder = (sortOrder) => {
@@ -24,6 +27,14 @@ const parseSortOrder = (sortOrder) => {
     return sortOrder;
   }
   return DEFAULT_PAGINATION_VALUES.sortOrder;
+};
+
+// suppliers
+const parseSortBySup = (sortBy) => {
+  if (SORT_FİELDS_SUPPLİERS.includes(sortBy)) {
+    return sortBy;
+  }
+  return DEFAULT_PAGINATION_VALUES.sortBy;
 };
 
 export const parseSortParamsSup = (query) => {
@@ -35,8 +46,17 @@ export const parseSortParamsSup = (query) => {
   };
 };
 
-export const parseSortParams = (query) => {
-  const sortBy = parseSortBy(query.sortBy);
+// orders
+
+const parseSortByOr = (sortBy) => {
+  if (SORT_FİELDS_ORDERS.includes(sortBy)) {
+    return sortBy;
+  }
+  return DEFAULT_PAGINATION_VALUES.sortBy;
+};
+
+export const parseSortParamsOr = (query) => {
+  const sortBy = parseSortByOr(query.sortBy);
   const sortOrder = parseSortOrder(query.sortOrder);
   return {
     sortBy,

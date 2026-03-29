@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { error } from "node:console";
 import {
   deleteProductServices,
   getProdutServices,
