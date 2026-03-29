@@ -1,6 +1,10 @@
 import { DEFAULT_PAGINATION_VALUES } from "constants/pagination";
 import { SupplierModel } from "db/models/Suppliers";
-import { SupplierServicesParams } from "types/supplier";
+import {
+  CreateSupplierRequest,
+  SupplierServicesParams,
+  UpdateSupplierRequest,
+} from "types/supplier";
 
 const getSupplierServices = async ({
   page = DEFAULT_PAGINATION_VALUES.page,
@@ -31,4 +35,18 @@ const getSupplierServices = async ({
     .limit(limit);
 };
 
-export { getSupplierServices };
+const newSupplierServices = async (data: CreateSupplierRequest) => {
+  return await SupplierModel.create(data);
+};
+
+const updateSupplierServices = async (
+  supplierId: string,
+  data: UpdateSupplierRequest,
+) => {
+  return await SupplierModel.findByIdAndUpdate(supplierId, data, {
+    returnDocument: "after",
+    includeResultMetadata: true,
+  });
+};
+
+export { getSupplierServices, newSupplierServices, updateSupplierServices };
