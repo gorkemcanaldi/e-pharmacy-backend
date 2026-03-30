@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import ProductRouter from "routes/product";
 import SuppliersRouter from "routes/supplier";
 import OrderRouter from "routes/order";
+import CustomerRouter from "routes/customer";
 
 export const createServer = () => {
   const PORT = process.env.PORT || 5000;
@@ -18,6 +19,7 @@ export const createServer = () => {
   app.use("/products", ProductRouter);
   app.use("/suppliers", SuppliersRouter);
   app.use("/orders", OrderRouter);
+  app.use("/customers", CustomerRouter);
   app.use(notPageHandler);
   app.use(errorHandler);
 

@@ -96,3 +96,18 @@ export const parseFilterParamsOr = (query) => {
     products: productsValue,
   };
 };
+
+export const parseFilterParamsCus = (query) => {
+  const { name, email, address, image, spent, phone, register_date } = query;
+  const spentValue = parseNumber(spent);
+  const phoneValue = parseNumber(phone);
+  return {
+    name,
+    email,
+    address,
+    image,
+    register_date,
+    spent: spentValue,
+    phone: phoneValue,
+  };
+};
