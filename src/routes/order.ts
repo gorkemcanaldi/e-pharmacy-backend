@@ -1,7 +1,7 @@
-import { getOrderController } from "controllers/ordersController";
+import { getOrderController } from "../controllers/ordersController";
 import { Router } from "express";
-import { userMiddlewares } from "middlewares/userMiddlewares";
-import { ctrlWrapper } from "utils/ctrlWrapper";
+import { userMiddlewares } from "../middlewares/userMiddlewares";
+import { ctrlWrapper } from "../utils/ctrlWrapper";
 
 const OrderRouter = Router();
 

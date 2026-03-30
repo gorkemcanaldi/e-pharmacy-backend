@@ -1,6 +1,6 @@
-import { DEFAULT_PAGINATION_VALUES } from "constants/pagination";
-import { OrderModel } from "db/models/Order";
-import { OrderServiceParams } from "types/order";
+import { DEFAULT_PAGINATION_VALUES } from "../constants/pagination";
+import { OrderModel } from "../db/models/Order";
+import { OrderServiceParams } from "../types/order";
 
 const getOrderServices = async ({
   page = DEFAULT_PAGINATION_VALUES.page,

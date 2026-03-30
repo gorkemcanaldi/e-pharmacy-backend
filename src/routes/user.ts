@@ -5,9 +5,9 @@ import {
   refreshController,
   registerController,
   userInfoController,
-} from "../controllers/user";
-import { userMiddlewares } from "middlewares/userMiddlewares";
-import { ctrlWrapper } from "utils/ctrlWrapper";
+} from "../controllers/userController";
+import { userMiddlewares } from "../middlewares/userMiddlewares";
+import { ctrlWrapper } from "../utils/ctrlWrapper";
 
 const UserRouter = Router();
 

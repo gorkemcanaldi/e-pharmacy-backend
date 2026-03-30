@@ -2,10 +2,10 @@ import {
   getSuppliersController,
   newSupplierController,
   updateSupplierController,
-} from "controllers/suppliersController";
+} from "../controllers/suppliersController";
 import { Router } from "express";
-import { userMiddlewares } from "middlewares/userMiddlewares";
-import { ctrlWrapper } from "utils/ctrlWrapper";
+import { userMiddlewares } from "../middlewares/userMiddlewares";
+import { ctrlWrapper } from "../utils/ctrlWrapper";
 
 const SuppliersRouter = Router();
 

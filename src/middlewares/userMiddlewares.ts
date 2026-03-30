@@ -1,4 +1,4 @@
-import sessionsCollection from "db/models/Sessions";
+import sessionsCollection from "../db/models/Sessions";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 

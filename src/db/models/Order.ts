@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { Order } from "types/order";
+import { Order } from "../../types/order";
 
 const orderSchema = new Schema<Order>(
   {

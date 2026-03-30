@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { getOrderServices } from "services/orders";
-import { parseFilterParamsOr } from "utils/parseFilterParams";
-import { parsedPaginationParams } from "utils/parsePaginationParams";
-import { parseSortParamsOr } from "utils/parseSortParams";
+import { getOrderServices } from "../services/orders";
+import { parseFilterParamsOr } from "../utils/parseFilterParams";
+import { parsedPaginationParams } from "../utils/parsePaginationParams";
+import { parseSortParamsOr } from "../utils/parseSortParams";
 
 const getOrderController = async (req: Request, res: Response) => {
   const queryParams = req.query;

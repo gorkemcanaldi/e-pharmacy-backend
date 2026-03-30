@@ -1,6 +1,6 @@
-import { DEFAULT_PAGINATION_VALUES } from "constants/pagination";
-import { CustomerModel } from "db/models/Customer";
-import { CustomerServiceParams } from "types/customer";
+import { DEFAULT_PAGINATION_VALUES } from "../constants/pagination";
+import { CustomerModel } from "../db/models/Customer";
+import { CustomerServiceParams } from "../types/customer";
 
 const getCustomerServices = async ({
   page = DEFAULT_PAGINATION_VALUES.page,

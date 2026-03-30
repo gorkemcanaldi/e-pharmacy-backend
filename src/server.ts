@@ -1,14 +1,14 @@
 import cors from "cors";
 import express from "express";
 import UserRouter from "./routes/user";
-import { errorHandler } from "middlewares/errorHandler";
-import { notPageHandler } from "middlewares/notPageHandler";
+import { errorHandler } from "./middlewares/errorHandler";
+import { notPageHandler } from "./middlewares/notPageHandler";
 import cookieParser from "cookie-parser";
-import ProductRouter from "routes/product";
-import SuppliersRouter from "routes/supplier";
-import OrderRouter from "routes/order";
-import CustomerRouter from "routes/customer";
-import DashboardRouter from "routes/dashboard";
+import ProductRouter from "./routes/product";
+import SuppliersRouter from "./routes/supplier";
+import OrderRouter from "./routes/order";
+import CustomerRouter from "./routes/customer";
+import DashboardRouter from "./routes/dashboard";
 
 export const createServer = () => {
   const PORT = process.env.PORT || 5000;

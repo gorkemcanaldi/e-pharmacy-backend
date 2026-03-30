@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IncomeExpense } from "types/IncomeExpense";
+import { IncomeExpense } from "../../types/IncomeExpense";
 
 const IncomeExpenseSchema = new Schema<IncomeExpense>(
   {

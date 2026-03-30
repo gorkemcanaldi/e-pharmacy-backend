@@ -1,10 +1,10 @@
-import { DEFAULT_PAGINATION_VALUES } from "constants/pagination";
-import { ProductModel } from "db/models/Product";
+import { DEFAULT_PAGINATION_VALUES } from "../constants/pagination";
+import { ProductModel } from "../db/models/Product";
 import {
   CreateProductRequest,
   ProductServiceParams,
   UpdateProductRequest,
-} from "types/product";
+} from "../types/product";
 
 const getProdutServices = ({
   page = DEFAULT_PAGINATION_VALUES.page,

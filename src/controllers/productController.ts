@@ -4,11 +4,11 @@ import {
   getProdutServices,
   newProductServices,
   updateProductServices,
-} from "services/product";
-import { parseFilterParams } from "utils/parseFilterParams";
-import { parsedPaginationParams } from "utils/parsePaginationParams";
-import { parseSortParams } from "utils/parseSortParams";
-import { productSchema } from "validator/productValidation";
+} from "../services/product";
+import { parseFilterParams } from "../utils/parseFilterParams";
+import { parsedPaginationParams } from "../utils/parsePaginationParams";
+import { parseSortParams } from "../utils/parseSortParams";
+import { productSchema } from "../validator/productValidation";
 
 const getProductController = async (req: Request, res: Response) => {
   const queryParams = req.query;

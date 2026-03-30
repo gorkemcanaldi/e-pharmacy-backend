@@ -1,7 +1,7 @@
-import { getDashboardController } from "controllers/dashboardController";
+import { getDashboardController } from "../controllers/dashboardController";
 import { Router } from "express";
-import { userMiddlewares } from "middlewares/userMiddlewares";
-import { ctrlWrapper } from "utils/ctrlWrapper";
+import { userMiddlewares } from "../middlewares/userMiddlewares";
+import { ctrlWrapper } from "../utils/ctrlWrapper";
 
 const DashboardRouter = Router();
 

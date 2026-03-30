@@ -1,10 +1,9 @@
 import createHttpError from "http-errors";
 import bcrypt from "bcrypt";
 import usersCollection from "../db/models/User";
-
-import { LoginInput, RegisterInput } from "validator/userValidator";
+import { LoginInput, RegisterInput } from "../validator/userValidator";
 import jwt from "jsonwebtoken";
-import sessionsCollection from "db/models/Sessions";
+import sessionsCollection from "../db/models/Sessions";
 
 const registerUser = async (UserData: RegisterInput) => {
   const { email, password } = UserData;

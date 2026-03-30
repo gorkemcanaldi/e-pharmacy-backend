@@ -3,7 +3,7 @@ import {
   loginSchema,
   RegisterInput,
   registerSchema,
-} from "validator/userValidator";
+} from "../validator/userValidator";
 import {
   loginUser,
   logoutUser,

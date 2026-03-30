@@ -3,11 +3,11 @@ import {
   getSupplierServices,
   newSupplierServices,
   updateSupplierServices,
-} from "services/suppliers";
-import { parseFilterParamsSup } from "utils/parseFilterParams";
-import { parsedPaginationParams } from "utils/parsePaginationParams";
-import { parseSortParamsSup } from "utils/parseSortParams";
-import { supplierSchema } from "validator/supliersValidation";
+} from "../services/suppliers";
+import { parseFilterParamsSup } from "../utils/parseFilterParams";
+import { parsedPaginationParams } from "../utils/parsePaginationParams";
+import { parseSortParamsSup } from "../utils/parseSortParams";
+import { supplierSchema } from "../validator/supliersValidation";
 
 const getSuppliersController = async (req: Request, res: Response) => {
   const queryParams = req.query;

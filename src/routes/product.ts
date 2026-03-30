@@ -3,10 +3,10 @@ import {
   getProductController,
   newProductController,
   updateProductController,
-} from "controllers/productController";
+} from "../controllers/productController";
 import { Router } from "express";
-import { userMiddlewares } from "middlewares/userMiddlewares";
-import { ctrlWrapper } from "utils/ctrlWrapper";
+import { userMiddlewares } from "../middlewares/userMiddlewares";
+import { ctrlWrapper } from "../utils/ctrlWrapper";
 
 const ProductRouter = Router();
 

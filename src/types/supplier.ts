@@ -33,7 +33,7 @@ export interface CreateSupplierRequest {
   name: string;
   address: string;
   suppliers: string;
-  date: Date;
+  date?: Date;
   amount: number;
   status: SuppliersStatus;
 }

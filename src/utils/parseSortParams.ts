@@ -5,7 +5,7 @@ import {
   SORT_ORDER,
   SORT_FİELDS_ORDERS,
   SORT_FİELDS_CUSTOMERS,
-} from "constants/pagination";
+} from "../constants/pagination";
 
 const parseSortBy = (sortBy) => {
   if (SORT_FİELDS.includes(sortBy)) {

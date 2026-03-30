@@ -1,4 +1,4 @@
-import { ProductCategory } from "types/product";
+import { ProductCategory } from "../types/product";
 import z from "zod";
 
 export const productSchema = z.object({

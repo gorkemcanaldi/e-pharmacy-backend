@@ -1,10 +1,10 @@
-import { DEFAULT_PAGINATION_VALUES } from "constants/pagination";
-import { SupplierModel } from "db/models/Suppliers";
+import { DEFAULT_PAGINATION_VALUES } from "../constants/pagination";
+import { SupplierModel } from "../db/models/Suppliers";
 import {
   CreateSupplierRequest,
   SupplierServicesParams,
   UpdateSupplierRequest,
-} from "types/supplier";
+} from "../types/supplier";
 
 const getSupplierServices = async ({
   page = DEFAULT_PAGINATION_VALUES.page,
