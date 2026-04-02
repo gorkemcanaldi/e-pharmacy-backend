@@ -1,15 +1,7 @@
-import { CustomerServiceParams } from "types/customer";
-import { OrderServiceParams, OrderStatus } from "types/order";
-import {
-  ProductCategory,
-  ProductServiceParams,
-  UpdateProductRequest,
-} from "types/product";
-import {
-  SupplierServicesParams,
-  SuppliersStatus,
-  UpdateSupplierRequest,
-} from "types/supplier";
+import { CustomerServiceParams } from "../types/customer";
+import { OrderServiceParams, OrderStatus } from "../types/order";
+import { ProductCategory, ProductServiceParams } from "../types/product";
+import { SupplierServicesParams, SuppliersStatus } from "../types/supplier";
 
 const parseNumber = (
   value: string | number | null | undefined,
