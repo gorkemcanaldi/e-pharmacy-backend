@@ -27,7 +27,7 @@ export interface OrderServiceParams {
     name?: string;
     address?: string;
     products?: number | null;
-    status?: OrderStatus;
+    status?: OrderStatus | null;
     price?: number | null;
     order_date?: Date;
   };
