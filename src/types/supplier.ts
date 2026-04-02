@@ -20,7 +20,7 @@ export interface SupplierServicesParams {
     suppliers?: string;
     date?: Date;
     amount?: number | null;
-    status?: SuppliersStatus;
+    status?: SuppliersStatus | null;
   };
 }
 

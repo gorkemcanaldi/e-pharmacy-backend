@@ -9,7 +9,7 @@ export const userMiddlewares = async (
 ) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    return res.status(401).send({ message: "No token provided" });
+    return res.status(401).json({ message: "No token provided" });
   }
 
   const token = authHeader.split(" ")[1];
@@ -17,20 +17,22 @@ export const userMiddlewares = async (
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
       id: string;
     };
+
     const session = await sessionsCollection.findOne({
       userId: decoded.id,
       accessToken: token,
     });
 
     if (!session) {
-      return res.status(401).send({ message: "session not found" });
+      return res.status(401).json({ message: "Session not found" });
     }
     if (session.accessTokenValidUntil < new Date()) {
-      return res.status(401).send({ message: "access token expired" });
+      return res.status(401).json({ message: "Access token expired" });
     }
+
     (req as any).user = decoded;
     next();
   } catch (error) {
-    return res.status(403).send({ message: "Invalid or expired token" });
+    return res.status(403).json({ message: "Invalid token" });
   }
 };

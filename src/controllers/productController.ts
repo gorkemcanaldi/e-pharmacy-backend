@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {
   deleteProductServices,
-  getProdutServices,
+  getProductServices,
   newProductServices,
   updateProductServices,
 } from "../services/product";
@@ -17,7 +17,7 @@ const getProductController = async (req: Request, res: Response) => {
 
   const filter = parseFilterParams(queryParams);
 
-  const data = await getProdutServices({
+  const data = await getProductServices({
     page,
     perPage,
     sortBy,

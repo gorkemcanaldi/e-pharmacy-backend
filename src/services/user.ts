@@ -69,7 +69,7 @@ const refreshUser = async (refreshToken: string) => {
   }
   const session = await sessionsCollection.findOne({ refreshToken });
   if (!session) {
-    throw createHttpError(403, "session bot found");
+    throw createHttpError(403, "session not found");
   }
   if (session.refreshTokenValidUntil < new Date()) {
     throw createHttpError(403, "refresh token expired");

@@ -50,7 +50,7 @@ const refreshController = async (req: Request, res: Response) => {
   });
 };
 
-const logoutContoller = async (req: Request, res: Response) => {
+const logoutController = async (req: Request, res: Response) => {
   const refreshToken = req.cookies?.refreshToken;
   const authHeader = req.headers.authorization;
   const accessToken = authHeader ? authHeader.split(" ")[1] : null;
@@ -83,6 +83,6 @@ export {
   registerController,
   loginController,
   refreshController,
-  logoutContoller,
+  logoutController,
   userInfoController,
 };

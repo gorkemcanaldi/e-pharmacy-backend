@@ -55,7 +55,7 @@ const updateSupplierController = async (req: Request, res: Response) => {
     parseResult.data,
   );
   if (!update) {
-    return res.status(404).json({ message: "Suplier not found" });
+    return res.status(404).json({ message: "Supplier not found" });
   }
   res.json(update);
 };

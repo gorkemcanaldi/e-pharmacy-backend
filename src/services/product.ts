@@ -6,7 +6,7 @@ import {
   UpdateProductRequest,
 } from "../types/product";
 
-const getProdutServices = ({
+const getProductServices = ({
   page = DEFAULT_PAGINATION_VALUES.page,
   perPage = DEFAULT_PAGINATION_VALUES.perPage,
   sortBy = DEFAULT_PAGINATION_VALUES.sortBy,
@@ -59,7 +59,7 @@ const newProductServices = async (data: CreateProductRequest) => {
 };
 
 export {
-  getProdutServices,
+  getProductServices,
   updateProductServices,
   deleteProductServices,
   newProductServices,
