@@ -29,7 +29,7 @@ const loginController = async (req: Request, res: Response) => {
   const { accessToken, refreshToken } = await loginUser(userData);
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: true,
+    //  secure: true,
     sameSite: "strict",
   });
 
@@ -60,7 +60,7 @@ const logoutContoller = async (req: Request, res: Response) => {
   res.clearCookie("refreshToken", {
     httpOnly: true,
     sameSite: "strict",
-    secure: true,
+    //secure: true,
   });
 
   res.status(200).send(result);
