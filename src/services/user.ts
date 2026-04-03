@@ -50,13 +50,14 @@ const loginUser = async (userData: LoginInput) => {
     { expiresIn: "24h" },
   );
 
-  await sessionsCollection.create({
+  const session = await sessionsCollection.create({
     userId: user._id,
     accessToken,
     refreshToken,
     accessTokenValidUntil: new Date(Date.now() + 15 * 60 * 1000),
     refreshTokenValidUntil: new Date(Date.now() + 24 * 60 * 60 * 1000),
   });
+  await session.save();
   return { accessToken, refreshToken };
 };
 const refreshUser = async (refreshToken: string) => {
