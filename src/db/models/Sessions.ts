@@ -30,6 +30,7 @@ const sessionsSchema = new Schema<ISession>(
     versionKey: false,
   },
 );
+sessionsSchema.index({ userId: 1 });
 
 const sessionsCollection = model<ISession>("Session", sessionsSchema);
 

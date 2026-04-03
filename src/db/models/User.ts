@@ -23,7 +23,7 @@ const userSchema = new Schema<IUser>(
     versionKey: false,
   },
 );
-
+userSchema.index({ email: 1 }, { unique: true });
 const usersCollection = model<IUser>("User", userSchema);
 
 export default usersCollection;
