@@ -39,7 +39,7 @@ const loginUser = async (userData: LoginInput) => {
       email: user.email,
     },
     process.env.JWT_SECRET as string,
-    { expiresIn: "15m" },
+    { expiresIn: "6m" },
   );
 
   const refreshToken = jwt.sign(
@@ -54,7 +54,7 @@ const loginUser = async (userData: LoginInput) => {
     userId: user._id,
     accessToken,
     refreshToken,
-    accessTokenValidUntil: new Date(Date.now() + 15 * 60 * 1000),
+    accessTokenValidUntil: new Date(Date.now() + 6 * 60 * 1000),
     refreshTokenValidUntil: new Date(Date.now() + 24 * 60 * 60 * 1000),
   });
   await session.save();

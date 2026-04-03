@@ -29,8 +29,8 @@ const loginController = async (req: Request, res: Response) => {
   const { accessToken, refreshToken } = await loginUser(userData);
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    sameSite: "lax",
-    secure: false,
+    sameSite: "none",
+    secure: true,
   });
 
   res.status(200).send({
