@@ -82,11 +82,11 @@ const refreshUser = async (refreshToken: string) => {
   const newAccessToken = jwt.sign(
     { id: session.userId.toString() },
     process.env.JWT_SECRET as string,
-    { expiresIn: "15m" },
+    { expiresIn: "24h" },
   );
 
   session.accessToken = newAccessToken;
-  session.accessTokenValidUntil = new Date(Date.now() + 15 * 60 * 1000);
+  session.accessTokenValidUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
   await session.save();
   return { accessToken: newAccessToken };
 };
