@@ -27,7 +27,6 @@ const registerController = async (req: Request, res: Response) => {
 const loginController = async (req: Request, res: Response) => {
   const userData: LoginInput = loginSchema.parse(req.body);
   const { accessToken, refreshToken } = await loginUser(userData);
-  console.log("refreshToken backendde:", refreshToken);
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     sameSite: "none",
@@ -43,7 +42,6 @@ const loginController = async (req: Request, res: Response) => {
 
 const refreshController = async (req: Request, res: Response) => {
   const userCookie = req.cookies.refreshToken;
-  console.log("req.cookies.refreshToken:", userCookie);
   const { accessToken } = await refreshUser(userCookie);
   res.status(200).send({
     message: "token refreshed",
