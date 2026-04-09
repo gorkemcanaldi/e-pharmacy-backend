@@ -84,7 +84,6 @@ export const parseFilterParamsCus = (
 ) => {
   const { name, email, address, image, spent, phone, register_date } =
     query ?? {};
-  const spentValue = spent != null ? parseNumber(spent) : null;
   const phoneValue = phone != null ? parseNumber(phone) : null;
   return {
     name,
@@ -92,7 +91,7 @@ export const parseFilterParamsCus = (
     address,
     image,
     register_date,
-    spent: spentValue,
+    spent,
     phone: phoneValue,
   };
 };

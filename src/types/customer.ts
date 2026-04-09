@@ -2,7 +2,7 @@ export interface Customer {
   image: string;
   name: string;
   email: string;
-  spent: number;
+  spent: string;
   phone: number;
   address: string;
   register_date: Date;
@@ -17,7 +17,7 @@ export interface CustomerServiceParams {
     image?: string;
     name?: string;
     address?: string;
-    spent?: number | null;
+    spent?: string | null;
     email?: string;
     phone?: number | null;
     register_date?: Date;

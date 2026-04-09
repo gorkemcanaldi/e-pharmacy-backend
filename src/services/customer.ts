@@ -22,8 +22,8 @@ const getCustomerServices = async ({
   if (filter.email) {
     customQuery.where("email", filter.email);
   }
-  if (filter.spent !== undefined && filter.spent !== null) {
-    customQuery.where("spent").lte(filter.spent);
+  if (filter.spent) {
+    customQuery.where("spent", filter.spent);
   }
   if (filter.phone !== undefined && filter.phone !== null) {
     customQuery.where("phone").lte(filter.phone);

@@ -11,7 +11,7 @@ const dashboardServices = async () => {
   const recentCustomers = await CustomerModel.find({})
     .sort({ createdAt: -1 })
     .limit(5)
-    .select("name email spentAmount country");
+    .select("image photo name email spent");
 
   const transactions = await IncomeExpenseModel.find({})
     .sort({ createdAt: -1 })

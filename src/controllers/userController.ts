@@ -27,13 +27,15 @@ const registerController = async (req: Request, res: Response) => {
 const loginController = async (req: Request, res: Response) => {
   const userData: LoginInput = loginSchema.parse(req.body);
   const { accessToken, refreshToken } = await loginUser(userData);
+
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    sameSite: "none",
-    secure: true,
+    sameSite: "lax",
+    // sameSite: "none",
+    //  secure: true,
   });
 
-  res.status(200).send({
+  return res.status(200).send({
     message: "login successful",
     status: 200,
     accessToken,
@@ -43,7 +45,7 @@ const loginController = async (req: Request, res: Response) => {
 const refreshController = async (req: Request, res: Response) => {
   const userCookie = req.cookies.refreshToken;
   const { accessToken } = await refreshUser(userCookie);
-  res.status(200).send({
+  return res.status(200).send({
     message: "token refreshed",
     status: 200,
     accessToken,
@@ -59,7 +61,8 @@ const logoutController = async (req: Request, res: Response) => {
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "lax",
+    //sameSite: "none",
     //secure: true,
   });
 
