@@ -30,9 +30,8 @@ const loginController = async (req: Request, res: Response) => {
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    sameSite: "lax",
-    // sameSite: "none",
-    //  secure: true,
+    sameSite: "none",
+    secure: true,
   });
 
   return res.status(200).send({
@@ -61,9 +60,8 @@ const logoutController = async (req: Request, res: Response) => {
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    sameSite: "lax",
-    //sameSite: "none",
-    //secure: true,
+    sameSite: "none",
+    secure: true,
   });
 
   res.status(200).send(result);

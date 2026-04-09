@@ -60,6 +60,7 @@ const loginUser = async (userData: LoginInput) => {
   await session.save();
   return { accessToken, refreshToken };
 };
+
 const refreshUser = async (refreshToken: string) => {
   if (!refreshToken) {
     throw createHttpError(401, "No refresh token");
