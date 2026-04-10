@@ -45,7 +45,6 @@ const updateSupplierServices = async (
 ) => {
   return await SupplierModel.findByIdAndUpdate(supplierId, data, {
     returnDocument: "after",
-    includeResultMetadata: true,
   });
 };
 

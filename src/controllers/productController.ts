@@ -43,9 +43,14 @@ const updateProductController = async (req: Request, res: Response) => {
     parseResult.data,
   );
   if (!update) {
-    return res.status(404).json({ message: "Product not found" });
+    return res.status(404).json({
+      message: "Product not found",
+    });
   }
-  res.json(update);
+  res.json({
+    message: "Product updated successfully",
+    data: update,
+  });
 };
 
 const deleteProductController = async (req: Request, res: Response) => {

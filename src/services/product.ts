@@ -41,12 +41,11 @@ const getProductServices = ({
 };
 
 const updateProductServices = async (
-  prdouctId: string,
+  productId: string,
   data: UpdateProductRequest,
 ) => {
-  return await ProductModel.findByIdAndUpdate(prdouctId, data, {
+  return await ProductModel.findByIdAndUpdate(productId, data, {
     returnDocument: "after",
-    includeResultMetadata: true,
   });
 };
 

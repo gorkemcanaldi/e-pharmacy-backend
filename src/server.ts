@@ -9,6 +9,8 @@ import SuppliersRouter from "./routes/supplier";
 import OrderRouter from "./routes/order";
 import CustomerRouter from "./routes/customer";
 import DashboardRouter from "./routes/dashboard";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger";
 
 export const createServer = () => {
   const PORT = process.env.PORT || 5000;
@@ -21,6 +23,8 @@ export const createServer = () => {
   );
   app.use(express.json());
   app.use(cookieParser());
+
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("/user", UserRouter);
   app.use("/products", ProductRouter);
   app.use("/suppliers", SuppliersRouter);
